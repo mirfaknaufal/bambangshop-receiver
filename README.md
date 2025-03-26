@@ -86,4 +86,8 @@ This is the place for you to write reflections:
 
 #### Reflection Subscriber-1
 
+1. In this tutorial, RwLock<> is necessary because it allows multiple threads to read the Vec of Notifications simultaneously while ensuring that only one thread can modify it at a time. This is important because reading notifications is more frequent than writing, so using RwLock<> improves efficiency by allowing concurrent reads without blocking. If we had used Mutex<>, every read operation would also require exclusive access, meaning only one thread could read or write at a time, significantly reducing performance due to unnecessary contention. By using RwLock<>, we optimize for high read concurrency while still ensuring safe writes.
+
+2. In Rust, mutable static variables are unsafe because Rust enforces strict ownership, borrowing, and thread safety rules to prevent data races at compile time. Unlike Java, where static variables can be freely mutated within static functions, Rust requires additional mechanisms like lazy_static with synchronization primitives (e.g., RwLock, Mutex, or DashMap) to ensure safe access across multiple threads. This design choice helps eliminate data races, unexpected mutations, and concurrency issues at compile time, making Rust’s static variables safer but more restrictive compared to Java.
+
 #### Reflection Subscriber-2
